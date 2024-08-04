@@ -24,15 +24,13 @@ public class Server {
     }
     public void listen(int port) {
         try (final var serverSocket = new ServerSocket(port)) {
-            System.out.println("Сервер запущен");
+            System.out.println("Server on port: " + port);
             while (true) {
-                try (final var socket = serverSocket.accept()) {
-                    connectionHandle(socket);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                Socket socket = serverSocket.accept();
+                connectionHandle(socket);
             }
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             throw new RuntimeException(e);
         }
     }

@@ -8,6 +8,7 @@ public class Main {
                 "/resources.html", "/styles.css", "/app.js", "/links.html", "/forms.html", "/classic.html",
                 "/events.html", "/events.js"));
         server.addHandler("GET", "/messages", (request, responseStream) -> {
+            System.out.println("GET /messages handler");
             String response = "HTTP/1.1 200 OK\r\n" +
                     "Content-Type: text/plain\r\n" +
                     "Content-Length: 13\r\n" +
@@ -19,12 +20,13 @@ public class Main {
         });
 
         server.addHandler("POST", "/messages", (request, responseStream) -> {
+            System.out.println("POST /messages handler");
             String response = "HTTP/1.1 200 OK\r\n" +
                     "Content-Type: text/plain\r\n" +
                     "Content-Length: 7\r\n" +
                     "Connection: close\r\n" +
                     "\r\n" +
-                    "Hi!";
+                    "Posted!";
             responseStream.write(response.getBytes());
             responseStream.flush();
         });
@@ -32,5 +34,3 @@ public class Main {
         server.listen(9999);
     }
 }
-
-
